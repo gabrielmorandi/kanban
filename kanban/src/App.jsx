@@ -36,6 +36,8 @@ function App() {
     fetchData()
   }, [])
 
+
+
   const handleToggleMainClass = () => {
     setMainClass((prevClass) => (prevClass === 'open' ? 'close' : 'open'))
   }
@@ -56,7 +58,7 @@ function App() {
           theme={theme}
           onBoardClick={handleBoardClick}
         />
-        <Nav boardName={selectedBoard ? selectedBoard.name : ''} theme={theme} />
+        <Nav boardName={selectedBoard ? selectedBoard.name : ''} theme={theme} data={data ? data.boards : []} />
         <div className="main">
           <BoardDetails board={selectedBoard} />
         </div>

@@ -5,7 +5,7 @@ import LogoDark from '../assets/logo-dark.svg';
 import VerticalEllipsis from '../assets/icon-vertical-ellipsis.svg';
 import PopUp from './PopUp';
 
-function Nav({ boardName, theme }) {
+function Nav({ boardName, theme, data }) {
   const [isPopUpOpen, setPopUpOpen] = useState(false);
 
   const handleButtonClick = () => {
@@ -27,7 +27,7 @@ function Nav({ boardName, theme }) {
           </div>
         </div>
       </nav>
-      {isPopUpOpen && <PopUp type="AddNewTask" onClose={closePopUp} />}
+      {isPopUpOpen && <PopUp type="AddNewTask" onClose={closePopUp} data={data} selectBoard={boardName} />}
     </>
   );
 }
