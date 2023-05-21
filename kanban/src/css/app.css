@@ -418,7 +418,7 @@ body main.dark .main .board-details > ul > li > ul > li h3 {
   line-height: 15px;
   color: #828FA3;
 }
-.popup .popup-content form .input input, .popup .popup-content form .input textarea {
+.popup .popup-content form .input input, .popup .popup-content form .input textarea, .popup .popup-content form .input select {
   padding: 8px 16px;
   border-radius: 4px;
   border: 1px solid rgba(130, 143, 163, 0.25);
@@ -427,6 +427,32 @@ body main.dark .main .board-details > ul > li > ul > li h3 {
   line-height: 23px;
   color: #000112;
   text-align: left;
+  cursor: pointer;
+}
+.popup .popup-content form .input select {
+  position: relative;
+  -webkit-appearance: none;
+  z-index: 2;
+  background: transparent;
+}
+.popup .popup-content form .input img {
+  cursor: pointer;
+}
+.popup .popup-content form .input:has(select) {
+  position: relative;
+}
+.popup .popup-content form .input:has(select)::after {
+  content: "";
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  right: 16px;
+  width: 10px;
+  height: 41px;
+  background-image: url("../assets/icon-chevron-down.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: 1;
 }
 .popup .popup-content form .subtask {
   display: flex;

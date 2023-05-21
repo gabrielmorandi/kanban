@@ -30,7 +30,7 @@
           font-size: 12px
           line-height: 15px
           color: v.$medium-gray
-        input, textarea
+        input, textarea, select
           padding: 8px 16px
           border-radius: 4px
           border: 1px solid rgba(130, 143, 163, 0.25)
@@ -39,6 +39,28 @@
           line-height: 23px
           color: v.$black
           text-align: left
+          cursor: pointer
+        select
+          position: relative
+          -webkit-appearance: none
+          z-index: 2
+          background: transparent
+        img
+          cursor: pointer
+      .input:has(select)
+        position: relative
+        &::after
+          content: ''
+          display: flex
+          position: absolute
+          bottom: 0
+          right: 16px
+          width: 10px
+          height: 41px
+          background-image: url('../assets/icon-chevron-down.svg')
+          background-repeat: no-repeat
+          background-position: center
+          z-index: 1
       .subtask
         display: flex
         align-items: center

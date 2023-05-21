@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-
 import Button from './Button';
-
 import X from '../assets/icon-cross.svg';
 
-function PopUp({ type, onClose }) {
+function PopUp({ type, onClose, data, selectBoard }) {
   const [taskTitle, setTaskTitle] = useState('');
   const [taskDescription, setTaskDescription] = useState('');
-  const [subtasks, setSubtasks] = useState(['']);
+  const [subtasks, setSubtasks] = useState([{ id: 1, content: '' }]);
+  const [a, setA] = useState(data.indexOf(data.find((board) => board.name === selectBoard)))
 
   const handleTaskTitleChange = (event) => {
     setTaskTitle(event.target.value);
@@ -18,21 +17,33 @@ function PopUp({ type, onClose }) {
   };
 
   const handleAddSubtask = () => {
-    setSubtasks([...subtasks, '']);
+    const newSubtask = { id: Date.now(), content: '' };
+    setSubtasks([...subtasks, newSubtask]);
+  };
+
+  const handleSubtaskChange = (index, event) => {
+    const updatedSubtasks = [...subtasks];
+    updatedSubtasks[index].content = event.target.value;
+    setSubtasks(updatedSubtasks);
+  };
+
+  const handleSubtaskDelete = (index) => {
+    const updatedSubtasks = subtasks.filter((_, i) => i !== index);
+    setSubtasks(updatedSubtasks);
   };
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
 
     // Aqui você pode adicionar a lógica para criar uma nova tarefa no data.json
-    // com os valores dos campos taskTitle e taskDescription
+    // com os valores dos campos taskTitle, taskDescription e subtasks
 
     // Fechar o popup após a criação da tarefa
     onClose();
   };
 
   let title, content;
-  
+
   switch (type) {
     case 'AddNewTask':
       title = 'Add New Task';
@@ -60,14 +71,17 @@ function PopUp({ type, onClose }) {
           <div className="input">
             <label>Subtasks</label>
             {subtasks.map((subtask, index) => (
-              <div className="subtask" key={index}>
+              <div className="subtask" key={subtask.id}>
                 <input
                   type="text"
-                  name={`subtask-${index}`} 
+                  name={`subtask-${index}`}
+                  value={subtask.content}
+                  onChange={(event) => handleSubtaskChange(index, event)}
                 />
                 <img
                   src={X}
                   alt="Excluir"
+                  onClick={() => handleSubtaskDelete(index)}
                 />
               </div>
             ))}
@@ -77,6 +91,16 @@ function PopUp({ type, onClose }) {
               t="button"
               func={handleAddSubtask}
             />
+          </div>
+          <div className="input">
+            <label htmlFor="columnSelector">Status</label>
+            <select id="columnSelector">
+              {data[a].columns.map((column) => (
+                <option key={column.name} value={column.name}>
+                  {column.name}
+                </option>
+              ))}
+            </select>
           </div>
           <Button type="btn-terciary" content="Create Task" t="submit" />
         </form>
