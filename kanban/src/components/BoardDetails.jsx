@@ -7,11 +7,13 @@ function BoardDetails({ board, data }) {
   const [isPopUpOpen, setPopUpOpen] = useState(false);
   const [taskName, setTaskName] = useState('')
   const [taskDescription, setTaskDescription] = useState('')
+  const [status, setStatus] = useState('')
 
-  const openPopUp = (taskTitle, taskDesc) => {
+  const openPopUp = (taskTitle, taskDesc, status) => {
     setPopUpOpen(true);
     setTaskName(taskTitle)
     setTaskDescription(taskDesc)
+    setStatus(status)
   };
 
   const closePopUp = () => {
@@ -34,7 +36,7 @@ function BoardDetails({ board, data }) {
                 </h2>
                 <ul>
                   {column.tasks.map((task) => (
-                    <li key={task.title} onClick={() => openPopUp(task.title, task.description)} >
+                    <li key={task.title} onClick={() => openPopUp(task.title, task.description, task.status)} >
                       <h3>{task.title}</h3>
                       <p>
                         {task.subtasks.filter((subtask) => subtask.isCompleted).length} of {task.subtasks.length} subtasks
@@ -46,7 +48,7 @@ function BoardDetails({ board, data }) {
             ))}
           </ul>
         </div>
-        {isPopUpOpen && <PopUp type="EditTask" onClose={closePopUp} data={data} taskName={taskName} taskDescr={taskDescription} />}
+        {isPopUpOpen && <PopUp type="EditTask" onClose={closePopUp} data={data} taskName={taskName} taskDescr={taskDescription} selectBoard={board} status={status} />}
       </>
     )
   } else {

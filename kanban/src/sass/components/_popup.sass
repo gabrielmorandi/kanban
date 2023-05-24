@@ -1,6 +1,6 @@
 @use '../abstracts/_v'
 .popup
-  position: absolute
+  position: fixed
   top: 0
   left: 0
   display: grid
@@ -16,6 +16,13 @@
     background-color: v.$white
     padding: 32px
     border-radius: 6px
+    header
+      display: flex
+      justify-content: space-between
+      align-items: center
+      gap: 24px
+      img
+        cursor: pointer
     h3
       font-weight: 700
       font-size: 18px
@@ -54,6 +61,7 @@
           -webkit-appearance: none
           z-index: 2
           background: transparent
+          option
         img
           cursor: pointer
       .input:has(select)
@@ -77,3 +85,45 @@
         margin-block-end: 4px
         input
           width: 100%
+      .check-tasks
+        display: flex
+        flex-direction: column
+        gap: 8px
+        h3
+          font-weight: bold
+          font-size: 12px
+          line-height: 15px
+          color: v.$medium-gray
+        .check label
+          width: 100%
+          display: flex
+          align-items: center
+          gap: 12px
+          padding: 12px
+          border-radius: 4px
+          background-color: v.$light-gray
+          cursor: pointer
+          input
+            appearance: none
+            background: #FFFFFF
+            min-width: 16px
+            min-height: 16px
+            border: 1px solid rgba(130, 143, 163, 0.248914)
+            border-radius: 2px
+            outline: none
+            cursor: pointer
+            &:checked
+              display: flex
+              appearance: auto
+              accent-color: v.$main-purple
+          p
+            font-weight: bold
+            font-size: 12px
+            line-height: 15px
+            color: v.$black
+          input:checked ~ p
+            text-decoration: line-through
+            mix-blend-mode: normal
+            opacity: 0.5
+          &:hover
+            background-color: rgba(99, 95, 199,.25)

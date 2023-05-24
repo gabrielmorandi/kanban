@@ -404,7 +404,7 @@ body main.dark .main .board-details > ul > li > ul > li h3 {
 }
 
 .popup {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   display: grid;
@@ -421,6 +421,15 @@ body main.dark .main .board-details > ul > li > ul > li h3 {
   background-color: #FFFFFF;
   padding: 32px;
   border-radius: 6px;
+}
+.popup .popup-content header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+}
+.popup .popup-content header img {
+  cursor: pointer;
 }
 .popup .popup-content h3 {
   font-weight: 700;
@@ -494,6 +503,56 @@ body main.dark .main .board-details > ul > li > ul > li h3 {
 }
 .popup .popup-content form .subtask input {
   width: 100%;
+}
+.popup .popup-content form .check-tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.popup .popup-content form .check-tasks h3 {
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 15px;
+  color: #828FA3;
+}
+.popup .popup-content form .check-tasks .check label {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 4px;
+  background-color: #F4F7FD;
+  cursor: pointer;
+}
+.popup .popup-content form .check-tasks .check label input {
+  appearance: none;
+  background: #FFFFFF;
+  min-width: 16px;
+  min-height: 16px;
+  border: 1px solid rgba(130, 143, 163, 0.248914);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+.popup .popup-content form .check-tasks .check label input:checked {
+  display: flex;
+  appearance: auto;
+  accent-color: #635FC7;
+}
+.popup .popup-content form .check-tasks .check label p {
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 15px;
+  color: #000112;
+}
+.popup .popup-content form .check-tasks .check label input:checked ~ p {
+  text-decoration: line-through;
+  mix-blend-mode: normal;
+  opacity: 0.5;
+}
+.popup .popup-content form .check-tasks .check label:hover {
+  background-color: rgba(99, 95, 199, 0.25);
 }
 
 /*# sourceMappingURL=app.css.map */

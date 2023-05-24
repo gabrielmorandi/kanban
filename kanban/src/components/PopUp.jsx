@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import Button from './Button';
 import X from '../assets/icon-cross.svg';
+import VerticalEllipsis from '../assets/icon-vertical-ellipsis.svg';
 
-function PopUp({ type, onClose, data, selectBoard, taskName, taskDescr }) {
+function PopUp({ type, onClose, data, selectBoard, taskName, taskDescr, status }) {
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
@@ -108,27 +109,66 @@ function PopUp({ type, onClose, data, selectBoard, taskName, taskDescr }) {
       );
       break;
     case 'EditTask':
-
-
+      const [b, setB] = useState(data.boards.indexOf(selectBoard))
 
       title = `${taskName}`;
       description = `${taskDescr}`
-      content = 'This is the edit task popup.';
-      break;
-    default:
-      title = 'Popup Content';
-      content = 'This is a popup component.';
+      content = (
+        <form>
+          <div className="check-tasks">
+            <h3>Subtasks (2 of 3)</h3>
+            {data.boards[b].columns.find(stat => stat.name === status).tasks.filter(task => task.title === taskName)[0].subtasks.map(subtask => (
+              subtask.isCompleted === true ? (
+                <div className="check">
+                  <label htmlFor={subtask.title}>
+                    <input type="checkbox" name={subtask.title} id={subtask.title} checked />
+                    <p>{subtask.title}</p>
+                  </label>
+                </div>
+              ) : (
+                <div className="check">
+                  <label htmlFor={subtask.title}>
+                    <input type="checkbox" name={subtask.title} id={subtask.title} />
+                    <p>{subtask.title}</p>
+                  </label>
+                </div>
+              )
+            ))}
+          </div>
+          <div className="input">
+            <label htmlFor="columnEditSelector">Status</label>
+            <select id="columnEditSelector">
+              {data.boards[b].columns.map(column => (
+                column.name == status ? (
+                  <option key={column.name} value={column.name} selected>
+                    {column.name}
+                  </option>
+                ) : (
+                  <option key={column.name} value={column.name}>
+                    {column.name}
+                  </option>
+                )
+              ))}
+            </select>
+          </div>
+        </form>
+      );
       break;
   }
 
   return (
     <div className="popup">
       <div className="popup-content">
-        <h3>{title}</h3>
+        {type == 'EditTask' ? (
+          <header>
+            <h3>{title}</h3>
+            <img src={VerticalEllipsis} alt="Menu Vertical" />
+          </header>
+        ) : <h3>{title}</h3>}
         {description ? (
           <h4>{description}</h4>
         ) : null}
-        <p>{content}</p>
+        {content}
         <Button type={'btn-close'} content={"Close"} func={onClose} />
       </div>
     </div>
