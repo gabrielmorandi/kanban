@@ -42,6 +42,7 @@ body main .main
           flex-direction: column
           gap: 20px
           > li
+            min-width: 280px
             display: flex
             flex-direction: column
             gap: 8px
@@ -49,6 +50,7 @@ body main .main
             padding: 23px 16px
             border-radius: 8px
             box-shadow: 0px 4px 6px rgba(54, 78, 126, 0.101545)
+            cursor: pointer
             h3
               font-weight: bold
               font-size: 15px
@@ -59,7 +61,9 @@ body main .main
               font-size: 12px
               line-height: 15px
               color: v.$medium-gray
-
+            &:hover
+              h3
+                color: v.$main-purple
 body main.dark .main .board-details > ul > li > ul > li
   background-color: v.$dark-gray
   h3

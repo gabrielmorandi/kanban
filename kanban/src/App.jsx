@@ -60,7 +60,7 @@ function App() {
         />
         <Nav boardName={selectedBoard ? selectedBoard.name : ''} theme={theme} data={data ? data.boards : []} />
         <div className="main">
-          <BoardDetails board={selectedBoard} />
+          <BoardDetails board={selectedBoard} data={data} />
         </div>
         {mainClass === 'close' && (
           <div className="show" onClick={handleToggleMainClass}>

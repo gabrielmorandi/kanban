@@ -2,35 +2,7 @@ import React, { useState } from 'react';
 import Button from './Button';
 import X from '../assets/icon-cross.svg';
 
-function PopUp({ type, onClose, data, selectBoard }) {
-  const [taskTitle, setTaskTitle] = useState('');
-  const [taskDescription, setTaskDescription] = useState('');
-  const [subtasks, setSubtasks] = useState([{ id: 1, content: '' }]);
-  const [a, setA] = useState(data.indexOf(data.find((board) => board.name === selectBoard)))
-
-  const handleTaskTitleChange = (event) => {
-    setTaskTitle(event.target.value);
-  };
-
-  const handleTaskDescriptionChange = (event) => {
-    setTaskDescription(event.target.value);
-  };
-
-  const handleAddSubtask = () => {
-    const newSubtask = { id: Date.now(), content: '' };
-    setSubtasks([...subtasks, newSubtask]);
-  };
-
-  const handleSubtaskChange = (index, event) => {
-    const updatedSubtasks = [...subtasks];
-    updatedSubtasks[index].content = event.target.value;
-    setSubtasks(updatedSubtasks);
-  };
-
-  const handleSubtaskDelete = (index) => {
-    const updatedSubtasks = subtasks.filter((_, i) => i !== index);
-    setSubtasks(updatedSubtasks);
-  };
+function PopUp({ type, onClose, data, selectBoard, taskName, taskDescr }) {
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
@@ -42,10 +14,39 @@ function PopUp({ type, onClose, data, selectBoard }) {
     onClose();
   };
 
-  let title, content;
+  let title, description, content;
 
   switch (type) {
     case 'AddNewTask':
+      const [taskTitle, setTaskTitle] = useState('');
+      const [taskDescription, setTaskDescription] = useState('');
+      const [subtasks, setSubtasks] = useState([{ id: 1, content: '' }]);
+      const [a, setA] = useState(data.indexOf(data.find((board) => board.name === selectBoard)))
+
+      const handleTaskTitleChange = (event) => {
+        setTaskTitle(event.target.value);
+      };
+
+      const handleTaskDescriptionChange = (event) => {
+        setTaskDescription(event.target.value);
+      };
+
+      const handleAddSubtask = () => {
+        const newSubtask = { id: Date.now(), content: '' };
+        setSubtasks([...subtasks, newSubtask]);
+      };
+
+      const handleSubtaskChange = (index, event) => {
+        const updatedSubtasks = [...subtasks];
+        updatedSubtasks[index].content = event.target.value;
+        setSubtasks(updatedSubtasks);
+      };
+
+      const handleSubtaskDelete = (index) => {
+        const updatedSubtasks = subtasks.filter((_, i) => i !== index);
+        setSubtasks(updatedSubtasks);
+      };
+
       title = 'Add New Task';
       content = (
         <form onSubmit={handleFormSubmit}>
@@ -106,12 +107,12 @@ function PopUp({ type, onClose, data, selectBoard }) {
         </form>
       );
       break;
-    case 'view':
-      title = 'View Task';
-      content = 'This is the view task popup.';
-      break;
-    case 'edit':
-      title = 'Edit Task';
+    case 'EditTask':
+
+
+
+      title = `${taskName}`;
+      description = `${taskDescr}`
       content = 'This is the edit task popup.';
       break;
     default:
@@ -124,8 +125,11 @@ function PopUp({ type, onClose, data, selectBoard }) {
     <div className="popup">
       <div className="popup-content">
         <h3>{title}</h3>
+        {description ? (
+          <h4>{description}</h4>
+        ) : null}
         <p>{content}</p>
-        <button onClick={onClose}>Close</button>
+        <Button type={'btn-close'} content={"Close"} func={onClose} />
       </div>
     </div>
   );

@@ -1,6 +1,8 @@
 @use '../abstracts/_v'
 .popup
   position: absolute
+  top: 0
+  left: 0
   display: grid
   place-items: center
   width: 100%
@@ -8,6 +10,9 @@
   background-color: rgba(0, 0, 0, .5)
   .popup-content
     width: 480px
+    display: flex
+    flex-direction: column
+    gap: 24px
     background-color: v.$white
     padding: 32px
     border-radius: 6px
@@ -16,11 +21,15 @@
       font-size: 18px
       line-height: 23px
       color: v.$black
+    h4
+      font-weight: medium
+      font-size: 13px
+      line-height: 23px
+      color: v.$medium-gray
     form
       display: flex
       flex-direction: column
       gap: 24px
-      padding-block-start: 24px
       .input
         display: flex
         flex-direction: column

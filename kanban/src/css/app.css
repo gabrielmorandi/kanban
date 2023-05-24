@@ -67,6 +67,23 @@
   background-color: #A8A4FF;
 }
 
+.btn-close {
+  display: flex;
+  justify-content: center;
+  padding-block: 8px;
+  border: none;
+  border-radius: 20px;
+  background-color: #EA5555;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 23px;
+  color: #FFFFFF;
+  cursor: pointer;
+}
+.btn-close:hover {
+  background-color: #FF9898;
+}
+
 main aside {
   display: flex;
   flex-direction: column;
@@ -353,6 +370,7 @@ body main .main .board-details > ul > li > ul {
   gap: 20px;
 }
 body main .main .board-details > ul > li > ul > li {
+  min-width: 280px;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -360,6 +378,7 @@ body main .main .board-details > ul > li > ul > li {
   padding: 23px 16px;
   border-radius: 8px;
   box-shadow: 0px 4px 6px rgba(54, 78, 126, 0.101545);
+  cursor: pointer;
 }
 body main .main .board-details > ul > li > ul > li h3 {
   font-weight: bold;
@@ -373,6 +392,9 @@ body main .main .board-details > ul > li > ul > li p {
   line-height: 15px;
   color: #828FA3;
 }
+body main .main .board-details > ul > li > ul > li:hover h3 {
+  color: #635FC7;
+}
 
 body main.dark .main .board-details > ul > li > ul > li {
   background-color: #2B2C37;
@@ -383,6 +405,8 @@ body main.dark .main .board-details > ul > li > ul > li h3 {
 
 .popup {
   position: absolute;
+  top: 0;
+  left: 0;
   display: grid;
   place-items: center;
   width: 100%;
@@ -391,6 +415,9 @@ body main.dark .main .board-details > ul > li > ul > li h3 {
 }
 .popup .popup-content {
   width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
   background-color: #FFFFFF;
   padding: 32px;
   border-radius: 6px;
@@ -401,11 +428,16 @@ body main.dark .main .board-details > ul > li > ul > li h3 {
   line-height: 23px;
   color: #000112;
 }
+.popup .popup-content h4 {
+  font-weight: medium;
+  font-size: 13px;
+  line-height: 23px;
+  color: #828FA3;
+}
 .popup .popup-content form {
   display: flex;
   flex-direction: column;
   gap: 24px;
-  padding-block-start: 24px;
 }
 .popup .popup-content form .input {
   display: flex;

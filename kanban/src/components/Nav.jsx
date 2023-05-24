@@ -8,7 +8,7 @@ import PopUp from './PopUp';
 function Nav({ boardName, theme, data }) {
   const [isPopUpOpen, setPopUpOpen] = useState(false);
 
-  const handleButtonClick = () => {
+  const openPopUp = () => {
     setPopUpOpen(true);
   };
 
@@ -22,8 +22,8 @@ function Nav({ boardName, theme, data }) {
         <div className="content">
           <h2>{boardName}</h2>
           <div className="content-right">
-            <Button type="btn-primary" content="+ Add New Task" func={handleButtonClick} />
-            <img src={VerticalEllipsis} alt="Menu Vertical" onClick={handleButtonClick} />
+            <Button type="btn-primary" content="+ Add New Task" func={openPopUp} />
+            <img src={VerticalEllipsis} alt="Menu Vertical" onClick={openPopUp} />
           </div>
         </div>
       </nav>
