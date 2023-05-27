@@ -56,6 +56,7 @@
           color: v.$black
           text-align: left
           cursor: pointer
+          background-color: transparent
         select
           position: relative
           -webkit-appearance: none
@@ -127,3 +128,21 @@
             opacity: 0.5
           &:hover
             background-color: rgba(99, 95, 199,.25)
+  &.dark
+    .popup-content
+      background-color: v.$dark-gray
+      h3
+        color: v.$white !important
+      form
+        .input
+          label, input, textarea, select
+            color: v.$white !important
+          select
+            background-color: v.$dark-gray !important
+        .check-tasks
+          .check label
+            background-color: v.$very-dark-gray
+            input
+              background-color: v.$dark-gray
+            p
+              color: v.$white

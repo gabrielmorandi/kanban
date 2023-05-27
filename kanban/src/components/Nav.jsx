@@ -27,7 +27,7 @@ function Nav({ boardName, theme, data }) {
           </div>
         </div>
       </nav>
-      {isPopUpOpen && <PopUp type="AddNewTask" onClose={closePopUp} data={data} selectBoard={boardName} />}
+      {isPopUpOpen && <PopUp type="AddNewTask" onClose={closePopUp} data={data} selectBoard={boardName} theme={theme} />}
     </>
   );
 }

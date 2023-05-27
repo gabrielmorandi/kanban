@@ -1,17 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from './Button';
 import X from '../assets/icon-cross.svg';
 import VerticalEllipsis from '../assets/icon-vertical-ellipsis.svg';
 
-function PopUp({ type, onClose, data, selectBoard, taskName, taskDescr, status }) {
+function PopUp({ type, onClose, data, selectBoard, taskName, taskDescr, status, theme }) {
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-
-    // Aqui você pode adicionar a lógica para criar uma nova tarefa no data.json
-    // com os valores dos campos taskTitle, taskDescription e subtasks
-
-    // Fechar o popup após a criação da tarefa
     onClose();
   };
 
@@ -73,7 +68,7 @@ function PopUp({ type, onClose, data, selectBoard, taskName, taskDescr, status }
           <div className="input">
             <label>Subtasks</label>
             {subtasks.map((subtask, index) => (
-              <div className="subtask" key={subtask.id}>
+              <div className="subtask" key={index}>
                 <input
                   type="text"
                   name={`subtask-${index}`}
@@ -110,54 +105,55 @@ function PopUp({ type, onClose, data, selectBoard, taskName, taskDescr, status }
       break;
     case 'EditTask':
       const [b, setB] = useState(data.boards.indexOf(selectBoard))
+      const [checkboxes, setCheckboxes] = useState([]);
+
+      useEffect(() => {
+        const task = data.boards[b].columns.find(stat => stat.name === status).tasks.filter(task => task.title === taskName)[0];
+        const newCheckboxes = task.subtasks.map(subtask => ({ id: subtask.title, isCompleted: subtask.isCompleted }));
+        console.log(newCheckboxes)
+        setCheckboxes(newCheckboxes);
+      }, [data, b, status, taskName]);
+
+      const handleCheckboxClick = (id) => {
+        setCheckboxes(prevCheckboxes =>
+          prevCheckboxes.map(checkbox =>
+            checkbox.id === id
+              ? { ...checkbox, isCompleted: !checkbox.isCompleted }
+              : checkbox
+          )
+        );
+      };
+      
 
       title = `${taskName}`;
-      description = `${taskDescr}`
-      content = (
-        <form>
-          <div className="check-tasks">
-            <h3>Subtasks (2 of 3)</h3>
-            {data.boards[b].columns.find(stat => stat.name === status).tasks.filter(task => task.title === taskName)[0].subtasks.map(subtask => (
-              subtask.isCompleted === true ? (
-                <div className="check">
-                  <label htmlFor={subtask.title}>
-                    <input type="checkbox" name={subtask.title} id={subtask.title} checked />
-                    <p>{subtask.title}</p>
-                  </label>
-                </div>
-              ) : (
-                <div className="check">
-                  <label htmlFor={subtask.title}>
-                    <input type="checkbox" name={subtask.title} id={subtask.title} />
-                    <p>{subtask.title}</p>
-                  </label>
-                </div>
-              )
-            ))}
-          </div>
-          <div className="input">
-            <label htmlFor="columnEditSelector">Status</label>
-            <select id="columnEditSelector">
-              {data.boards[b].columns.map(column => (
-                column.name == status ? (
-                  <option key={column.name} value={column.name} selected>
-                    {column.name}
-                  </option>
-                ) : (
-                  <option key={column.name} value={column.name}>
-                    {column.name}
-                  </option>
-                )
-              ))}
-            </select>
-          </div>
-        </form>
-      );
-      break;
+    description = `${taskDescr}`
+    content = (
+      <form onSubmit={handleFormSubmit}>
+        <div className="check-tasks">
+          <h3>Subtasks (2 of 3)</h3>
+          {checkboxes.map((checkbox, index) => (
+            <div className="check" key={index}>
+              <label htmlFor={checkbox.id}>
+                <input
+                  type="checkbox"
+                  name={checkbox.id}
+                  id={checkbox.id}
+                  checked={checkbox.isCompleted}
+                  onClick={() => handleCheckboxClick(checkbox.id)}
+                />
+                <p>Subtask {index + 1}</p>
+              </label>
+            </div>
+          ))}
+        </div>
+        {/* Restante do código */}
+      </form>
+    );
+    break;
   }
 
   return (
-    <div className="popup">
+    <div className={`${theme} popup`} >
       <div className="popup-content">
         {type == 'EditTask' ? (
           <header>

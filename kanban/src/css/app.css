@@ -469,6 +469,7 @@ body main.dark .main .board-details > ul > li > ul > li h3 {
   color: #000112;
   text-align: left;
   cursor: pointer;
+  background-color: transparent;
 }
 .popup .popup-content form .input select {
   position: relative;
@@ -553,6 +554,27 @@ body main.dark .main .board-details > ul > li > ul > li h3 {
 }
 .popup .popup-content form .check-tasks .check label:hover {
   background-color: rgba(99, 95, 199, 0.25);
+}
+.popup.dark .popup-content {
+  background-color: #2B2C37;
+}
+.popup.dark .popup-content h3 {
+  color: #FFFFFF !important;
+}
+.popup.dark .popup-content form .input label, .popup.dark .popup-content form .input input, .popup.dark .popup-content form .input textarea, .popup.dark .popup-content form .input select {
+  color: #FFFFFF !important;
+}
+.popup.dark .popup-content form .input select {
+  background-color: #2B2C37 !important;
+}
+.popup.dark .popup-content form .check-tasks .check label {
+  background-color: #20212C;
+}
+.popup.dark .popup-content form .check-tasks .check label input {
+  background-color: #2B2C37;
+}
+.popup.dark .popup-content form .check-tasks .check label p {
+  color: #FFFFFF;
 }
 
 /*# sourceMappingURL=app.css.map */
