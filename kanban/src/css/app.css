@@ -402,6 +402,9 @@ body main.dark .main .board-details > ul > li > ul > li {
 body main.dark .main .board-details > ul > li > ul > li h3 {
   color: #FFFFFF;
 }
+body main.dark .main .board-details > ul > li > ul > li:hover h3 {
+  color: #635FC7 !important;
+}
 
 .popup {
   position: fixed;
@@ -476,6 +479,9 @@ body main.dark .main .board-details > ul > li > ul > li h3 {
   -webkit-appearance: none;
   z-index: 2;
   background: transparent;
+}
+.popup .popup-content form .input select option {
+  background-color: #FFFFFF;
 }
 .popup .popup-content form .input img {
   cursor: pointer;
@@ -565,7 +571,10 @@ body main.dark .main .board-details > ul > li > ul > li h3 {
   color: #FFFFFF !important;
 }
 .popup.dark .popup-content form .input select {
-  background-color: #2B2C37 !important;
+  background-color: tansparent !important;
+}
+.popup.dark .popup-content form .input option {
+  background-color: #20212C;
 }
 .popup.dark .popup-content form .check-tasks .check label {
   background-color: #20212C;

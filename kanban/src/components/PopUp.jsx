@@ -123,33 +123,42 @@ function PopUp({ type, onClose, data, selectBoard, taskName, taskDescr, status, 
           )
         );
       };
-      
+
 
       title = `${taskName}`;
-    description = `${taskDescr}`
-    content = (
-      <form onSubmit={handleFormSubmit}>
-        <div className="check-tasks">
-          <h3>Subtasks (2 of 3)</h3>
-          {checkboxes.map((checkbox, index) => (
-            <div className="check" key={index}>
-              <label htmlFor={checkbox.id}>
-                <input
-                  type="checkbox"
-                  name={checkbox.id}
-                  id={checkbox.id}
-                  checked={checkbox.isCompleted}
-                  onClick={() => handleCheckboxClick(checkbox.id)}
-                />
-                <p>Subtask {index + 1}</p>
-              </label>
+      description = `${taskDescr}`
+      content = (
+        <form onSubmit={handleFormSubmit}>
+          <div className="check-tasks">
+            <h3>Subtasks (2 of 3)</h3>
+            {checkboxes.map((checkbox, index) => (
+              <div className="check" key={index}>
+                <label htmlFor={checkbox.id}>
+                  <input
+                    type="checkbox"
+                    name={checkbox.id}
+                    id={checkbox.id}
+                    checked={checkbox.isCompleted}
+                    onClick={() => handleCheckboxClick(checkbox.id)}
+                  />
+                  <p>{checkbox.id}</p>
+                </label>
+              </div>
+            ))}
+          </div>
+          <div className="input">
+              <label htmlFor="columnSelector">Current Status</label>
+              <select id="columnSelector">
+                {data.boards[b].columns.map((column) => (
+                  <option key={column.name} value={column.name}>
+                    {column.name}
+                  </option>
+                ))}
+              </select>
             </div>
-          ))}
-        </div>
-        {/* Restante do código */}
-      </form>
-    );
-    break;
+        </form>
+      );
+      break;
   }
 
   return (

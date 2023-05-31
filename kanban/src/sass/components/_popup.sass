@@ -63,6 +63,7 @@
           z-index: 2
           background: transparent
           option
+            background-color: v.$white
         img
           cursor: pointer
       .input:has(select)
@@ -138,7 +139,9 @@
           label, input, textarea, select
             color: v.$white !important
           select
-            background-color: v.$dark-gray !important
+            background-color: tansparent !important
+          option
+            background-color: v.$very-dark-gray
         .check-tasks
           .check label
             background-color: v.$very-dark-gray
