@@ -84,6 +84,37 @@
   background-color: #FF9898;
 }
 
+.btn-del {
+  display: flex;
+  justify-content: center;
+  padding-block: 8px;
+  border: none;
+  border-radius: 20px;
+  background-color: #EA5555;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 23px;
+  color: #FFFFFF;
+  cursor: pointer;
+}
+.btn-del:hover {
+  background-color: #FF9898;
+}
+
+.btn-del-close {
+  display: flex;
+  justify-content: center;
+  padding-block: 8px;
+  border: none;
+  border-radius: 20px;
+  background-color: #FFFFFF;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 23px;
+  color: #635FC7;
+  cursor: pointer;
+}
+
 main aside {
   display: flex;
   flex-direction: column;
@@ -446,6 +477,18 @@ body main.dark .main .board-details > ul > li > ul > li:hover h3 {
   line-height: 23px;
   color: #828FA3;
 }
+.popup .popup-content .del-header h3 {
+  color: #EA5555;
+}
+.popup .popup-content .del-buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+.popup .popup-content .del-buttons button {
+  width: 100%;
+}
 .popup .popup-content form {
   display: flex;
   flex-direction: column;
@@ -566,6 +609,9 @@ body main.dark .main .board-details > ul > li > ul > li:hover h3 {
 }
 .popup.dark .popup-content h3 {
   color: #FFFFFF !important;
+}
+.popup.dark .popup-content .del-header h3 {
+  color: #EA5555 !important;
 }
 .popup.dark .popup-content form .input label, .popup.dark .popup-content form .input input, .popup.dark .popup-content form .input textarea, .popup.dark .popup-content form .input select {
   color: #FFFFFF !important;

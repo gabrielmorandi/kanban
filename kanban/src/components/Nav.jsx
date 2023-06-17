@@ -7,6 +7,7 @@ import PopUp from "./PopUp"
 
 function Nav({ boardName, theme, data }) {
   const [isPopUpOpen, setPopUpOpen] = useState(false)
+  const [delPopUp, setDelPopUp] = useState(false)
 
   const openPopUp = () => {
     setPopUpOpen(true)
@@ -14,6 +15,14 @@ function Nav({ boardName, theme, data }) {
 
   const closePopUp = () => {
     setPopUpOpen(false)
+  }
+
+  const openDelPopUp = () => {
+    setDelPopUp(true)
+  }
+
+  const closeDelPopUp = () => {
+    setDelPopUp(false)
   }
 
   return (
@@ -30,7 +39,7 @@ function Nav({ boardName, theme, data }) {
             <img
               src={VerticalEllipsis}
               alt="Menu Vertical"
-              onClick={openPopUp}
+              onClick={openDelPopUp}
             />
           </div>
         </div>
@@ -39,6 +48,15 @@ function Nav({ boardName, theme, data }) {
         <PopUp
           type="AddNewTask"
           onClose={closePopUp}
+          data={data}
+          selectBoard={boardName}
+          theme={theme}
+        />
+      )}
+      {delPopUp && (
+        <PopUp
+          type="DelBoard"
+          onClose={closeDelPopUp}
           data={data}
           selectBoard={boardName}
           theme={theme}

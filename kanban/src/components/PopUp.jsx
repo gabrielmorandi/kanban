@@ -173,6 +173,28 @@ function PopUp({
         </form>
       )
       break
+    case "DelBoard":
+      const [c, setC] = useState(
+        data.indexOf(data.find((board) => board.name === selectBoard))
+      )
+      title = `Delete this board?`
+      content = (
+        <>
+          <header className="del-header">
+            <h3>{title}</h3>
+          </header>
+          <h4>
+            `Are you sure you want to delete the ‘${data[c].name}’ board? This
+            action will remove all columns and tasks and cannot be reversed.`
+          </h4>
+
+          <div className="del-buttons">
+            <Button type={"btn-del"} content={"Delete"} func={onClose} />
+            <Button type={"btn-del-close"} content={"Cancel"} func={onClose} />
+          </div>
+        </>
+      )
+      break
   }
 
   return (
@@ -183,12 +205,14 @@ function PopUp({
             <h3>{title}</h3>
             <img src={VerticalEllipsis} alt="Menu Vertical" />
           </header>
-        ) : (
+        ) : type == "DelBoard" ? null : (
           <h3>{title}</h3>
         )}
         {description ? <h4>{description}</h4> : null}
         {content}
-        <Button type={"btn-close"} content={"Close"} func={onClose} />
+        {type == "DelBoard" ? null : (
+          <Button type={"btn-close"} content={"Close"} func={onClose} />
+        )}
       </div>
     </div>
   )
