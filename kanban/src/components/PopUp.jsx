@@ -1,49 +1,59 @@
-import React, { useState, useEffect } from 'react';
-import Button from './Button';
-import X from '../assets/icon-cross.svg';
-import VerticalEllipsis from '../assets/icon-vertical-ellipsis.svg';
+import React, { useState, useEffect } from "react"
+import Button from "./Button"
+import X from "../assets/icon-cross.svg"
+import VerticalEllipsis from "../assets/icon-vertical-ellipsis.svg"
 
-function PopUp({ type, onClose, data, selectBoard, taskName, taskDescr, status, theme }) {
-
+function PopUp({
+  type,
+  onClose,
+  data,
+  selectBoard,
+  taskName,
+  taskDescr,
+  status,
+  theme,
+}) {
   const handleFormSubmit = (event) => {
-    event.preventDefault();
-    onClose();
-  };
+    event.preventDefault()
+    onClose()
+  }
 
-  let title, description, content;
+  let title, description, content
 
   switch (type) {
-    case 'AddNewTask':
-      const [taskTitle, setTaskTitle] = useState('');
-      const [taskDescription, setTaskDescription] = useState('');
-      const [subtasks, setSubtasks] = useState([{ id: 1, content: '' }]);
-      const [a, setA] = useState(data.indexOf(data.find((board) => board.name === selectBoard)))
+    case "AddNewTask":
+      const [taskTitle, setTaskTitle] = useState("")
+      const [taskDescription, setTaskDescription] = useState("")
+      const [subtasks, setSubtasks] = useState([{ id: 1, content: "" }])
+      const [a, setA] = useState(
+        data.indexOf(data.find((board) => board.name === selectBoard))
+      )
 
       const handleTaskTitleChange = (event) => {
-        setTaskTitle(event.target.value);
-      };
+        setTaskTitle(event.target.value)
+      }
 
       const handleTaskDescriptionChange = (event) => {
-        setTaskDescription(event.target.value);
-      };
+        setTaskDescription(event.target.value)
+      }
 
       const handleAddSubtask = () => {
-        const newSubtask = { id: Date.now(), content: '' };
-        setSubtasks([...subtasks, newSubtask]);
-      };
+        const newSubtask = { id: Date.now(), content: "" }
+        setSubtasks([...subtasks, newSubtask])
+      }
 
       const handleSubtaskChange = (index, event) => {
-        const updatedSubtasks = [...subtasks];
-        updatedSubtasks[index].content = event.target.value;
-        setSubtasks(updatedSubtasks);
-      };
+        const updatedSubtasks = [...subtasks]
+        updatedSubtasks[index].content = event.target.value
+        setSubtasks(updatedSubtasks)
+      }
 
       const handleSubtaskDelete = (index) => {
-        const updatedSubtasks = subtasks.filter((_, i) => i !== index);
-        setSubtasks(updatedSubtasks);
-      };
+        const updatedSubtasks = subtasks.filter((_, i) => i !== index)
+        setSubtasks(updatedSubtasks)
+      }
 
-      title = 'Add New Task';
+      title = "Add New Task"
       content = (
         <form onSubmit={handleFormSubmit}>
           <div className="input">
@@ -101,31 +111,35 @@ function PopUp({ type, onClose, data, selectBoard, taskName, taskDescr, status, 
           </div>
           <Button type="btn-terciary" content="Create Task" t="submit" />
         </form>
-      );
-      break;
-    case 'EditTask':
+      )
+      break
+    case "EditTask":
       const [b, setB] = useState(data.boards.indexOf(selectBoard))
-      const [checkboxes, setCheckboxes] = useState([]);
+      const [checkboxes, setCheckboxes] = useState([])
 
       useEffect(() => {
-        const task = data.boards[b].columns.find(stat => stat.name === status).tasks.filter(task => task.title === taskName)[0];
-        const newCheckboxes = task.subtasks.map(subtask => ({ id: subtask.title, isCompleted: subtask.isCompleted }));
+        const task = data.boards[b].columns
+          .find((stat) => stat.name === status)
+          .tasks.filter((task) => task.title === taskName)[0]
+        const newCheckboxes = task.subtasks.map((subtask) => ({
+          id: subtask.title,
+          isCompleted: subtask.isCompleted,
+        }))
         console.log(newCheckboxes)
-        setCheckboxes(newCheckboxes);
-      }, [data, b, status, taskName]);
+        setCheckboxes(newCheckboxes)
+      }, [data, b, status, taskName])
 
       const handleCheckboxClick = (id) => {
-        setCheckboxes(prevCheckboxes =>
-          prevCheckboxes.map(checkbox =>
+        setCheckboxes((prevCheckboxes) =>
+          prevCheckboxes.map((checkbox) =>
             checkbox.id === id
               ? { ...checkbox, isCompleted: !checkbox.isCompleted }
               : checkbox
           )
-        );
-      };
+        )
+      }
 
-
-      title = `${taskName}`;
+      title = `${taskName}`
       description = `${taskDescr}`
       content = (
         <form onSubmit={handleFormSubmit}>
@@ -147,37 +161,37 @@ function PopUp({ type, onClose, data, selectBoard, taskName, taskDescr, status, 
             ))}
           </div>
           <div className="input">
-              <label htmlFor="columnSelector">Current Status</label>
-              <select id="columnSelector">
-                {data.boards[b].columns.map((column) => (
-                  <option key={column.name} value={column.name}>
-                    {column.name}
-                  </option>
-                ))}
-              </select>
-            </div>
+            <label htmlFor="columnSelector">Current Status</label>
+            <select id="columnSelector">
+              {data.boards[b].columns.map((column) => (
+                <option key={column.name} value={column.name}>
+                  {column.name}
+                </option>
+              ))}
+            </select>
+          </div>
         </form>
-      );
-      break;
+      )
+      break
   }
 
   return (
-    <div className={`${theme} popup`} >
+    <div className={`${theme} popup`}>
       <div className="popup-content">
-        {type == 'EditTask' ? (
+        {type == "EditTask" ? (
           <header>
             <h3>{title}</h3>
             <img src={VerticalEllipsis} alt="Menu Vertical" />
           </header>
-        ) : <h3>{title}</h3>}
-        {description ? (
-          <h4>{description}</h4>
-        ) : null}
+        ) : (
+          <h3>{title}</h3>
+        )}
+        {description ? <h4>{description}</h4> : null}
         {content}
-        <Button type={'btn-close'} content={"Close"} func={onClose} />
+        <Button type={"btn-close"} content={"Close"} func={onClose} />
       </div>
     </div>
-  );
+  )
 }
 
-export default PopUp;
+export default PopUp

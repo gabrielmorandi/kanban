@@ -1,21 +1,21 @@
-import React, { useState, useEffect } from 'react'
-import { getData } from './connections/getData'
-import Button from './components/Button'
-import Aside from './components/Aside'
-import Nav from './components/Nav'
-import BoardDetails from './components/BoardDetails'
-import './css/app.css'
-import ShowSidebar from './assets/icon-show-sidebar.svg'
+import React, { useState, useEffect } from "react"
+import { getData } from "./connections/getData"
+import Button from "./components/Button"
+import Aside from "./components/Aside"
+import Nav from "./components/Nav"
+import BoardDetails from "./components/BoardDetails"
+import "./css/app.css"
+import ShowSidebar from "./assets/icon-show-sidebar.svg"
 
 function App() {
   const [data, setData] = useState(null)
-  const [mainClass, setMainClass] = useState('open')
-  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light')
-  const [selectedBoard, setSelectedBoard] = useState(null) 
+  const [mainClass, setMainClass] = useState("open")
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light")
+  const [selectedBoard, setSelectedBoard] = useState(null)
   const toggleTheme = () => {
-    const updatedTheme = theme === 'light' ? 'dark' : 'light'
+    const updatedTheme = theme === "light" ? "dark" : "light"
     setTheme(updatedTheme)
-    localStorage.setItem('theme', updatedTheme)
+    localStorage.setItem("theme", updatedTheme)
   }
 
   useEffect(() => {
@@ -23,8 +23,8 @@ function App() {
       try {
         const result = await getData()
         setData(result)
-        
-        const lastSelectedBoardIndex = localStorage.getItem('lastSelectedBoard')
+
+        const lastSelectedBoardIndex = localStorage.getItem("lastSelectedBoard")
         if (lastSelectedBoardIndex && result.boards[lastSelectedBoardIndex]) {
           setSelectedBoard(result.boards[lastSelectedBoardIndex])
         }
@@ -36,15 +36,13 @@ function App() {
     fetchData()
   }, [])
 
-
-
   const handleToggleMainClass = () => {
-    setMainClass((prevClass) => (prevClass === 'open' ? 'close' : 'open'))
+    setMainClass((prevClass) => (prevClass === "open" ? "close" : "open"))
   }
 
   const handleBoardClick = (board) => {
     setSelectedBoard(board)
-    localStorage.setItem('lastSelectedBoard', board.id)
+    localStorage.setItem("lastSelectedBoard", board.id)
   }
 
   return (
@@ -58,11 +56,15 @@ function App() {
           theme={theme}
           onBoardClick={handleBoardClick}
         />
-        <Nav boardName={selectedBoard ? selectedBoard.name : ''} theme={theme} data={data ? data.boards : []} />
+        <Nav
+          boardName={selectedBoard ? selectedBoard.name : ""}
+          theme={theme}
+          data={data ? data.boards : []}
+        />
         <div className="main">
           <BoardDetails board={selectedBoard} data={data} theme={theme} />
         </div>
-        {mainClass === 'close' && (
+        {mainClass === "close" && (
           <div className="show" onClick={handleToggleMainClass}>
             <img src={ShowSidebar} alt="ShowSidebar" />
           </div>
